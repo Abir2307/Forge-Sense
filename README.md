@@ -1,9 +1,4 @@
 # Forge-Sense SafetyTwin
-
-<p align="center">
-  <img src="docs/images/System_Architecture.png" alt="Forge-Sense System Architecture" width="900"/>
-</p>
-
 <p align="center">
 <b>AI-Powered Industrial Safety Intelligence Platform for Predictive Risk Assessment, Permit Intelligence, Compliance Monitoring, and Emergency Response</b>
 </p>
@@ -40,7 +35,7 @@ The platform assists safety engineers, plant operators, and compliance officers 
 # System Architecture
 
 <p align="center">
-<img src="docs/images/system_architecture.png" width="900">
+<img src="docs/images/System_Architecture.png" width="900">
 </p>
 
 The system follows a layered architecture consisting of a presentation layer, orchestration layer, AI intelligence layer, and persistence layer.
