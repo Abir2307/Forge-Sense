@@ -194,7 +194,8 @@ Forge-Sense correlates multiple safety indicators instead of relying on isolated
 | GUI | PySide6 |
 | Database | SQLite |
 | Computer Vision | YOLOv8 + OpenCV |
-| AI | Rule-based Safety Intelligence |
+| AI | PyTorch, Ultralytics |
+| Retrieval | ChromaDb |
 | Knowledge Graph | NetworkX |
 | Visualization | Qt Widgets |
 | Reporting | ReportLab |
@@ -226,6 +227,7 @@ Historical metrics become available as operational data accumulates.
 - Incident Analysis
 - Compliance Monitoring
 - Knowledge Graph
+- Retrieval-Augmented Generation (RAG)
 - QR Information Retrieval
 - Emergency Response
 - Evaluation Metrics
@@ -235,8 +237,9 @@ Historical metrics become available as operational data accumulates.
 - Live SCADA Integration
 - Industrial IoT Deployment
 - Multi-camera Vision Analytics
-- Worker Localization
-- Predictive Machine Learning
+- Worker Localization (RTLS/UWB/GPS)
+- Predictive Risk Forecasting using Machine Learning
+- Expanded RAG with larger industrial knowledge repositories and semantic reasoning
 - Enterprise Digital Twin Expansion
 
 ---
@@ -245,7 +248,7 @@ Historical metrics become available as operational data accumulates.
 
 - Industrial SCADA Integration
 - Live PLC Connectivity
-- Worker Localization (RTLS/UWB)
+- Worker Localization (RTLS/UWB/GPS)
 - Predictive Risk Forecasting
 - RAG-powered Compliance Intelligence
 - Enterprise-scale Digital Twin
