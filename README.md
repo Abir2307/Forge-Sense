@@ -76,7 +76,6 @@ The dashboard provides live operational awareness through:
 - AI Recommendations
 
 ---
----
 
 # Core Modules
 
