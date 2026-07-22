@@ -42,6 +42,8 @@ def build():
         "--clean",
         "--name",
         "ForgeSense",
+        "--icon",
+        str(ROOT / "assets" / "logo.ico"),
         "--onedir",
         "--windowed",
     ]

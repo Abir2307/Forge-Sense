@@ -1,8 +1,8 @@
 import smtplib
 from email.mime.text import MIMEText
 
-EMAIL = ""
-APP_PASSWORD = "" 
+EMAIL = "abirsaha548@gmail.com"
+APP_PASSWORD = "scyw abkq bquy usco" 
 
 def send_email_otp(to_email, otp):
     msg = MIMEText(f"Your OTP is: {otp}")
