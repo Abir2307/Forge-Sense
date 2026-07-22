@@ -38,29 +38,16 @@ The platform assists safety engineers, plant operators, and compliance officers 
 <img src="docs/images/System_Architecture.png" width="900">
 </p>
 
-The system follows a layered architecture consisting of a presentation layer, orchestration layer, AI intelligence layer, and persistence layer.
-
-```
-                User Interface
-                     │
-                     ▼
-      Safety Intelligence Worker
-                     │
-                     ▼
-    Safety Intelligence Platform
-                     │
- ┌────────┬────────┬────────┬────────┬────────┬────────┐
- │Permit  │Incident│Compliance│Emergency│Knowledge│ Risk │
- │Agent   │Agent   │ Agent    │Response │ Graph   │Engine│
- └────────┴────────┴────────┴────────┴────────┴────────┘
-                     │
-                     ▼
-              SQLite Database
+Thus, the system follows a layered architecture consisting of a presentation layer, orchestration layer, AI intelligence layer, and persistence layer.
 ```
 
 ---
 
 # Architecture Components
+
+<p align="center">
+<img src="docs/images/Dashboard.png" width="900">
+</p>
 
 ## 1. User Interface Layer
 
