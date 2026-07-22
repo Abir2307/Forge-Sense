@@ -202,30 +202,6 @@ Forge-Sense correlates multiple safety indicators instead of relying on isolated
 
 ---
 
-# Project Structure
-
-```text
-Forge-Sense
-│
-├── safetwin
-│   ├── core
-│   ├── services
-│   ├── ui
-│   ├── model
-│   ├── database
-│   └── app.py
-│
-├── docs
-│   └── images
-│
-├── tests
-│
-├── requirements.txt
-└── README.md
-```
-
----
-
 # Evaluation Framework
 
 The platform evaluates operational performance using
@@ -265,28 +241,6 @@ Historical metrics become available as operational data accumulates.
 
 ---
 
-# Installation
-
-Clone the repository
-
-```bash
-git clone https://github.com/<username>/Forge-Sense.git
-```
-
-Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-Launch Forge-Sense
-
-```bash
-python -m safetwin.app
-```
-
----
-
 # Future Roadmap
 
 - Industrial SCADA Integration
@@ -315,9 +269,3 @@ Industrial AI • Computer Vision • Digital Twins • Intelligent Safety Syste
 # License
 
 This project is released for academic research, industrial demonstrations and use.
-
----
-
-# Acknowledgements
-
-Forge-Sense draws inspiration from Industry 4.0, Industrial Digital Twins, AI-driven Safety Intelligence, and Predictive Risk Management frameworks.
