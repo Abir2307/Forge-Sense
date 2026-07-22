@@ -75,10 +75,22 @@ class AnalysisWorker(QObject):
                 hotspots = []
                 for h in hazards:
                     if isinstance(h, dict):
+                        entry = {
+                            'level': h.get('level', 'LOW'),
+                            'score': h.get('score', 0.0),
+                        }
                         if 'zone_id' in h and h['zone_id'] is not None:
-                            hotspots.append({'zone_id': str(h['zone_id'])})
+                            entry['zone_id'] = str(h['zone_id'])
+                            hotspots.append(entry)
                         elif 'zone_index' in h:
-                            hotspots.append(h['zone_index'])
+                            zi = h['zone_index']
+                            if isinstance(zi, dict):
+                                entry['by'] = zi.get('by', zi.get('row', 0))
+                                entry['bx'] = zi.get('bx', zi.get('column', 0))
+                            elif isinstance(zi, (tuple, list)) and len(zi) >= 2:
+                                entry['by'] = int(zi[0])
+                                entry['bx'] = int(zi[1])
+                            hotspots.append(entry)
 
                 # Update safety worker with latest frame hazards for real-time risk calculation
                 from safetwin.services.safety_intelligence_worker import SafetyIntelligenceWorker

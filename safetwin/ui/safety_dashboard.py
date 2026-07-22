@@ -96,20 +96,35 @@ class ZoneStatsTableModel(QAbstractTableModel):
         bottom_right = self.index(row_index, 2)
         self.dataChanged.emit(top_left, bottom_right, [Qt.DisplayRole])
 
+    def _is_hotspot_critical(self, hs) -> bool:
+        """Check whether a hotspot entry indicates CRITICAL-level hazard."""
+        if isinstance(hs, dict):
+            return str(hs.get('level', 'LOW')).upper() == 'CRITICAL'
+        return False
+
     def record_frame(self, zone_map, hotspots):
         """Record one processed frame for every zone in the current grid."""
         if zone_map is None:
             return
-        # Support both grid (2D array) and perspective/list-of-zones formats
-        hotspot_zone_ids = set()
+        # Build a mapping: zone_id -> bool indicating if at least one CRITICAL hazard exists
+        hotspot_critical_map = {}
         for hs in (hotspots or []):
+            is_critical = self._is_hotspot_critical(hs)
             if isinstance(hs, dict):
+                zone_id = None
                 if 'zone_id' in hs:
-                    hotspot_zone_ids.add(str(hs['zone_id']))
+                    zone_id = str(hs['zone_id'])
                 elif 'id' in hs:
-                    hotspot_zone_ids.add(str(hs['id']))
+                    zone_id = str(hs['id'])
+                # For grid-style hotspots, build the canonical key
+                if zone_id is None and 'by' in hs and 'bx' in hs:
+                    zone_id = f"{int(hs['by'])}:{int(hs['bx'])}"
+                if zone_id:
+                    # Keep True if already critical in this frame
+                    hotspot_critical_map[zone_id] = hotspot_critical_map.get(zone_id, False) or is_critical
             elif isinstance(hs, (tuple, list)) and len(hs) >= 2:
-                hotspot_zone_ids.add(str((int(hs[0]), int(hs[1]))))
+                zone_id = str((int(hs[0]), int(hs[1])))
+                hotspot_critical_map[zone_id] = hotspot_critical_map.get(zone_id, False) or is_critical
 
         # Perspective-style zone list
         if isinstance(zone_map, dict) or isinstance(zone_map, list):
@@ -123,7 +138,8 @@ class ZoneStatsTableModel(QAbstractTableModel):
                     zid = str(z.get('id', f"zone_{len(self._rows)+1}"))
                     self._rows.append(zid)
                     self._row_lookup[zid] = len(self._rows) - 1
-                    self._stats[zid] = {"critical_frames": 1 if zid in hotspot_zone_ids else 0, "total_frames": 1}
+                    is_critical = hotspot_critical_map.get(zid, False)
+                    self._stats[zid] = {"critical_frames": 1 if is_critical else 0, "total_frames": 1}
                 self.endResetModel()
                 return
 
@@ -140,7 +156,7 @@ class ZoneStatsTableModel(QAbstractTableModel):
 
                 stats = self._stats[zid]
                 stats["total_frames"] += 1
-                if zid in hotspot_zone_ids:
+                if hotspot_critical_map.get(zid, False):
                     stats["critical_frames"] += 1
                 updated_rows.append(self._row_lookup[zid])
 
@@ -155,7 +171,14 @@ class ZoneStatsTableModel(QAbstractTableModel):
         if zone_array.ndim != 2:
             return
 
-        hotspot_lookup = {self._normalize_hotspot(hotspot) for hotspot in (hotspots or [])}
+        # Build grid hotspot lookup: (row, col) -> is_critical
+        hotspot_lookup = {}
+        for hs in (hotspots or []):
+            norm = self._normalize_hotspot(hs)
+            if norm is not None:
+                is_critical = self._is_hotspot_critical(hs)
+                hotspot_lookup[norm] = hotspot_lookup.get(norm, False) or is_critical
+
         updated_rows = []
 
         if not self._rows:
@@ -169,7 +192,8 @@ class ZoneStatsTableModel(QAbstractTableModel):
                     zone_id = f"{row_index}:{column_index}"
                     self._rows.append(zone_id)
                     self._row_lookup[zone_id] = len(self._rows) - 1
-                    self._stats[zone_id] = {"critical_frames": 1 if (row_index, column_index) in hotspot_lookup else 0, "total_frames": 1}
+                    is_critical = hotspot_lookup.get((row_index, column_index), False)
+                    self._stats[zone_id] = {"critical_frames": 1 if is_critical else 0, "total_frames": 1}
 
             self.endResetModel()
             return
@@ -187,7 +211,7 @@ class ZoneStatsTableModel(QAbstractTableModel):
 
                 stats = self._stats[zone_id]
                 stats["total_frames"] += 1
-                if (row_index, column_index) in hotspot_lookup:
+                if hotspot_lookup.get((row_index, column_index), False):
                     stats["critical_frames"] += 1
                 updated_rows.append(self._row_lookup[zone_id])
 
