@@ -103,9 +103,6 @@ Update Dashboard
         ▼
       Repeat
 ```
-
----
-
 ## 3. Safety Intelligence Platform
 
 This is the central orchestration engine responsible for combining outputs from multiple AI agents into a single operational risk assessment.
