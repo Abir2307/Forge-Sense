@@ -1,34 +1,43 @@
 # Forge-Sense SafetyTwin
+
 <p align="center">
-<b>AI-Powered Industrial Safety Intelligence Platform for Predictive Risk Assessment, Permit Intelligence, Compliance Monitoring, and Emergency Response</b>
+<b>An AI-Powered Industrial Safety Digital Twin for Compound Risk Assessment, Permit Intelligence, Knowledge Graph Reasoning, and Emergency Response.</b>
 </p>
 
 ---
 
 ## Overview
 
-**Forge-Sense SafetyTwin** is an AI-powered Industrial Safety Intelligence Platform that creates a digital representation of an industrial facility by integrating multiple operational data sources into a unified safety intelligence system.
+Forge-Sense SafetyTwin is an intelligent industrial safety platform that creates a **real-time Safety Digital Twin** of an industrial environment by integrating information from:
 
-Unlike conventional safety monitoring systems that evaluate isolated sensor values, Forge-Sense performs **compound risk analysis**, correlating IoT sensor readings, Permit-to-Work (PTW) information, historical incidents, compliance records, and contextual knowledge to provide predictive situational awareness.
+- Industrial IoT sensors
+- Computer vision detections
+- Permit-to-Work (PTW) systems
+- Compliance records
+- Historical incidents
+- Safety Knowledge Graph
+- Spatial risk mapping
 
-The platform assists safety engineers, plant operators, and compliance officers by identifying emerging hazards, recommending preventive actions, and orchestrating emergency responses before incidents escalate.
+Instead of monitoring individual safety parameters independently, Forge-Sense performs **compound risk assessment**, correlating multiple heterogeneous data sources to identify hazardous operational conditions before they escalate.
+
+The platform is designed as a modular desktop application using **Python** and **PySide6**, enabling future integration with enterprise SCADA systems, CCTV analytics, and Industry 4.0 infrastructure.
 
 ---
 
-## Key Features
+# Key Features
 
-- Real-time Industrial Safety Monitoring
-- Compound Risk Detection
-- Permit-to-Work Intelligence
-- Historical Incident Pattern Analysis
+- Industrial Safety Digital Twin
+- Compound Risk Assessment
+- Real-Time Risk Dashboard
+- Zone-based Heatmap Visualization
+- Permit Intelligence
+- Historical Incident Analysis
 - Compliance Monitoring
+- Knowledge Graph Reasoning
 - Emergency Response Orchestration
-- Interactive Safety Dashboard
-- Geospatial Heatmap Visualization
-- Knowledge Graph-based Hazard Correlation
+- QR-based Hazard Information Retrieval
 - Evaluation Metrics Dashboard
 - Modular AI Agent Architecture
-- SQLite-backed Operational Database
 
 ---
 
@@ -38,276 +47,142 @@ The platform assists safety engineers, plant operators, and compliance officers 
 <img src="docs/images/System_Architecture.png" width="900">
 </p>
 
-The system follows a layered architecture consisting of a presentation layer, orchestration layer, AI intelligence layer, and persistence layer.
+Forge-Sense follows a layered architecture consisting of:
 
-```
-                User Interface
-                     │
-                     ▼
-      Safety Intelligence Worker
-                     │
-                     ▼
-    Safety Intelligence Platform
-                     │
- ┌────────┬────────┬────────┬────────┬────────┬────────┐
- │Permit  │Incident│Compliance│Emergency│Knowledge│ Risk │
- │Agent   │Agent   │ Agent    │Response │ Graph   │Engine│
- └────────┴────────┴────────┴────────┴────────┴────────┘
-                     │
-                     ▼
-              SQLite Database
-```
+- Presentation Layer
+- Worker Layer
+- Safety Intelligence Platform
+- AI Intelligence Modules
+- Persistence Layer
 
 ---
 
-# Architecture Components
+# Dashboard
 
-## 1. User Interface Layer
+<p align="center">
+<img src="docs/images/Dashboard.png" width="900">
+</p>
 
-The desktop application is built using **PySide6** and provides a real-time visualization of plant safety conditions.
+The dashboard provides live operational awareness through:
 
-### Modules
-
-- Main Window
-- Safety Dashboard
-- Heatmap Widget
-- Video Display
-- Permit Panel
-- Compliance Panel
-- Incident Panel
-
-Capabilities include
-
-- Live Risk Score
-- Alerts
-- Heatmaps
-- Recommendations
+- Risk Score
+- Risk Level
+- Heatmap Visualization
+- Permit Summary
+- Compliance Status
+- Incident Intelligence
+- Emergency Notifications
 - Evaluation Metrics
-- Incident Summary
+- AI Recommendations
 
 ---
 
-## 2. Safety Intelligence Worker
+# Core Modules
 
-The worker continuously executes the monitoring loop without blocking the graphical interface.
+## Safety Intelligence Platform
 
-Responsibilities include
+Central orchestration engine responsible for
 
-- Reading sensors
-- Collecting permit information
-- Running AI assessment
-- Updating dashboard
-- Emitting Qt signals
-
-Execution Flow
-
-```
-Read Sensor Data
-        │
-        ▼
-Read Active Permits
-        │
-        ▼
-Perform Risk Assessment
-        │
-        ▼
-Update Dashboard
-        │
-        ▼
-      Repeat
-```
-
----
-
-## 3. Safety Intelligence Platform
-
-This is the central orchestration engine responsible for combining outputs from multiple AI agents into a single operational risk assessment.
-
-Responsibilities
-
+- Compound Risk Assessment
 - Agent Coordination
-- Composite Risk Calculation
 - Recommendation Generation
-- Emergency Triggering
-- Evaluation Metric Generation
+- Emergency Decision Support
 
 ---
 
-# AI Intelligence Modules
+## Permit Intelligence
 
-## Permit Intelligence Agent
-
-Analyzes active permits against operational conditions.
-
-Functions
-
-- Permit Validation
-- Simultaneous Operation Detection
-- Hazard Correlation
-- Permit Risk Classification
-
-Example
-
-```
-Hot Work Permit
-      +
-Gas Sensor Alert
-      +
-Maintenance Activity
-
-↓
-
-High Compound Risk
-```
+- Permit validation
+- SIMOPS detection
+- Permit risk scoring
+- Sensor correlation
 
 ---
 
-## Incident Pattern Analyzer
+## Incident Intelligence
 
-Uses historical incidents and near-miss events to estimate future operational risk.
-
-Capabilities
-
-- Pattern Detection
-- Historical Hotspots
-- Repeat Incident Identification
-- Risk Escalation
+- Historical incident analysis
+- Near-miss pattern mining
+- Repeat hazard identification
+- Trend analysis
 
 ---
 
 ## Compliance Monitor
 
-Performs automated compliance evaluation against industrial regulations.
-
-Current Standards
+Evaluates industrial operations against
 
 - Factory Act
 - OISD
 - DGFASLI
 
-Outputs
+Provides
 
-- Compliance Status
+- Compliance status
 - Violations
-- Corrective Actions
+- Recommendations
 
 ---
 
-## Emergency Response Orchestrator
+## Emergency Response
 
-Coordinates emergency response workflows whenever critical hazards are detected.
+Supports
 
-Functions
-
-- Emergency Detection
-- Evacuation Trigger
-- Evidence Preservation
-- Incident Reporting
-
-Future Integrations
-
-- SMS
-- Email
-- MQTT
-- Public Address Systems
+- Hazard escalation
+- Emergency alerts
+- Evidence preservation
+- Incident logging
 
 ---
 
 ## Safety Knowledge Graph
 
-Maintains relationships among
+Models relationships between
 
 - Equipment
 - Hazards
-- Permits
 - Locations
 - Workers
-- Historical Incidents
+- Permits
+- Historical incidents
 
-Graph reasoning improves contextual understanding and compound hazard detection.
+to enable contextual safety reasoning.
 
 ---
 
-## Composite Risk Engine
+## QR-based Information Retrieval
 
-Instead of relying on a single sensor threshold, Forge-Sense combines multiple indicators.
+Each detected hazard or monitored zone can be associated with a QR code that provides contextual operational information, including:
 
-Inputs include
+- Active permits
+- Equipment details
+- Hazard history
+- Applicable safety guidelines
+- Emergency procedures
 
-- Gas Concentration
-- Temperature
-- Humidity
+This enables rapid access to safety information directly from the operational environment.
+
+---
+
+# Compound Risk Assessment
+
+Forge-Sense correlates multiple safety indicators instead of relying on isolated thresholds.
+
+### Inputs
+
+- Environmental Sensors
 - Permit Status
-- Compliance Status
 - Incident History
+- Compliance Records
 - Knowledge Graph Context
+- Computer Vision Events
 
-Outputs
+### Outputs
 
-- Overall Risk Score
+- Composite Risk Score
 - Risk Category
-- Recommendations
+- AI Recommendations
 - Emergency Actions
-
----
-
-# Database
-
-SQLite currently stores operational information.
-
-Core Tables
-
-```
-work_permits
-
-equipment
-
-incidents
-
-near_miss_events
-
-hazard_logs
-
-compliance_audit
-```
-
-The architecture allows migration to PostgreSQL or enterprise databases without major modifications.
-
----
-
-# Project Structure
-
-```
-Forge-Sense/
-
-│
-├── safetwin/
-│   ├── ui/
-│   │     ├── main_window.py
-│   │     ├── safety_dashboard.py
-│   │     ├── heatmap_widget.py
-│   │     └── video_display.py
-│   │
-│   ├── services/
-│   │     ├── safety_intelligence_platform.py
-│   │     ├── safety_intelligence_worker.py
-│   │     ├── permit_intelligence_agent.py
-│   │     ├── incident_pattern_analyzer.py
-│   │     ├── compliance_monitor.py
-│   │     ├── emergency_orchestrator.py
-│   │     ├── knowledge_graph.py
-│   │     └── evaluation_metrics.py
-│   │
-│   ├── database.py
-│   └── app.py
-│
-├── docs/
-│   └── images/
-│        └── system_architecture.png
-│
-├── requirements.txt
-└── README.md
-```
 
 ---
 
@@ -315,103 +190,74 @@ Forge-Sense/
 
 | Category | Technology |
 |-----------|------------|
-| Language | Python 3 |
+| Language | Python |
 | GUI | PySide6 |
 | Database | SQLite |
-| AI Modules | Custom Rule Engine |
-| Visualization | Qt Graphics |
-| Heatmap | Custom Visualization |
-| Future CV | YOLO / OpenCV |
-| Future ML | PyTorch / Scikit-Learn |
+| Computer Vision | YOLOv8 + OpenCV |
+| AI | PyTorch, Ultralytics |
+| Retrieval | ChromaDb |
+| Knowledge Graph | NetworkX |
+| Visualization | Qt Widgets |
+| Reporting | ReportLab |
+| OCR | EasyOCR |
 
 ---
 
-# Evaluation Metrics
+# Evaluation Framework
 
-The platform currently reports
+The platform evaluates operational performance using
 
-- False Negative Rate
+- False Negative Rate (FNR)
 - Lead Time
 - Geospatial Quality
 
-Geo Quality supports fallback estimation using permit locations, while False Negative Rate and Lead Time require historical operational data.
+Historical metrics become available as operational data accumulates.
 
 ---
 
-# Current Status
+# Current Implementation
 
-Implemented
+### Implemented
 
-- User Interface
-- Dashboard
-- Heatmap
+- Safety Digital Twin
+- Compound Risk Engine
+- Interactive Dashboard
+- Heatmap Visualization
 - Permit Intelligence
 - Incident Analysis
 - Compliance Monitoring
 - Knowledge Graph
-- Composite Risk Assessment
+- Retrieval-Augmented Generation (RAG)
+- QR Information Retrieval
 - Emergency Response
 - Evaluation Metrics
 
-Pending
+### Planned
 
 - Live SCADA Integration
-- CCTV Analytics
-- Worker Tracking
-- Predictive Machine Learning
-- Retrieval-Augmented Generation (RAG)
-- Digital Twin Visualization
+- Industrial IoT Deployment
+- Multi-camera Vision Analytics
+- Worker Localization (RTLS/UWB/GPS)
+- Predictive Risk Forecasting using Machine Learning
+- Expanded RAG with larger industrial knowledge repositories and semantic reasoning
+- Enterprise Digital Twin Expansion
 
 ---
 
 # Future Roadmap
 
-## Short-Term
-
-- Populate historical incident database
-- Connect live IoT sensors
-- Enhance compound risk rules
-- Improve permit lifecycle tracking
-
-## Medium-Term
-
-- Computer Vision Integration
-- Predictive Risk Modeling
-- Compliance Intelligence using RAG
-- Worker Location Tracking
-
-## Long-Term
-
-- Industrial Digital Twin
-- Predictive Hazard Forecasting
-- Automated Regulatory Reporting
-- Closed-loop Emergency Management
+- Industrial SCADA Integration
+- Live PLC Connectivity
+- Worker Localization (RTLS/UWB/GPS)
+- Predictive Risk Forecasting
+- RAG-powered Compliance Intelligence
+- Enterprise-scale Digital Twin
+- Multi-facility Monitoring
+- Advanced Hazard Simulation
 
 ---
 
-# Running the Project
-
-Clone the repository
-
-```bash
-git clone https://github.com/<username>/Forge-Sense.git
-```
-
-Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-Run the application
-
-```bash
-python -m safetwin.app
-```
-
----
-
-# Contributors
+# Author
 
 **Abir Saha**
 
@@ -419,16 +265,10 @@ B.Tech Computer Science & Engineering
 
 RCC Institute of Information Technology
 
-AI • Computer Vision • Industrial Safety • Digital Twin • Intelligent Systems
+Industrial AI • Computer Vision • Digital Twins • Intelligent Safety Systems
 
 ---
 
 # License
 
-This project is intended for academic research, industrial safety demonstrations, and educational purposes.
-
----
-
-## Acknowledgements
-
-Inspired by modern Industrial Digital Twin systems, AI-driven safety intelligence, Industry 4.0 principles, and predictive risk management frameworks aimed at improving workplace safety and operational resilience.
+This project is released for academic research, industrial demonstrations and use.
