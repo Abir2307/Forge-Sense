@@ -96,7 +96,7 @@
     {
       "id": "zone_5",
       "name": "Zone 5",
-      "type": "CONFINED_SPACE",
+      "type": "CAUTION",
       "polygon": [
         [
           0.33,

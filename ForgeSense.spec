@@ -1,12 +1,33 @@
 # -*- mode: python ; coding: utf-8 -*-
 
+from PyInstaller.utils.hooks import collect_all
+
+# Collect everything required by ChromaDB
+chroma_datas, chroma_binaries, chroma_hiddenimports = collect_all("chromadb")
 
 a = Analysis(
     ['E:\\Forge-Sense\\safetwin\\app.py'],
-    pathex=[],
-    binaries=[],
-    datas=[('E:\\Forge-Sense\\safetwin\\auth\\assets', './safetwin/auth/assets'), ('E:\\Forge-Sense\\assets', './assets'), ('E:\\Forge-Sense\\config', './config'), ('E:\\Forge-Sense\\data', './data')],
-    hiddenimports=[],
+    pathex=['E:\\Forge-Sense'],
+
+    binaries=chroma_binaries,
+
+    datas=[
+        # Project assets
+        ('E:\\Forge-Sense\\assets', 'assets'),
+        ('E:\\Forge-Sense\\config', 'config'),
+        ('E:\\Forge-Sense\\data', 'data'),
+
+        # Authentication assets
+        ('E:\\Forge-Sense\\safetwin\\auth\\assets',
+         'safetwin\\auth\\assets'),
+
+        # YOLO model folder
+        ('E:\\Forge-Sense\\safetwin\\model',
+         'safetwin\\model'),
+    ] + chroma_datas,
+
+    hiddenimports=chroma_hiddenimports,
+
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
@@ -14,6 +35,7 @@ a = Analysis(
     noarchive=False,
     optimize=0,
 )
+
 pyz = PYZ(a.pure)
 
 exe = EXE(
@@ -32,8 +54,9 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['E:\\Forge-Sense\\assets\\logo.ico'],
+    icon='E:\\Forge-Sense\\assets\\logo.ico',
 )
+
 coll = COLLECT(
     exe,
     a.binaries,
